@@ -16,6 +16,11 @@ This repository aims to be a location where TheHive and Cortex users can find an
 - Workflow and automation tools
 - Feeders
 
+## Available configuration
+
+- [TheHive 3 + Cortex 3](./thehive3-cortex3-es7)
+- [Cortex 3 with dockerized neurons](./cortex3-dockerized-neurons)
+
 ## TODO
 
 The list bellow includes the docker-compose configurations to be done:
