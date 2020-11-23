@@ -1,0 +1,119 @@
+version: "3"
+services:
+  elasticsearch:
+    image: elasticsearch:6.8.8
+    environment:
+      - http.host=0.0.0.0
+      - discovery.type=single-node
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    networks:
+      - backend
+
+  cortex:
+    image: thehiveproject/cortex:3.0.1
+    depends_on:
+      - elasticsearch
+      - traefik
+    networks:
+      - proxy
+      - backend
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cortexdocker.entrypoints=https"
+      - "traefik.http.routers.cortexdocker.rule=Host(`${CORTEX_HOST}`)"
+      - "traefik.http.routers.cortexdocker.service=cortexdocker"
+      - "traefik.http.routers.cortexdocker.tls=true"
+      - "traefik.http.services.cortexdocker.loadbalancer.server.port=9001"
+      - "traefik.http.routers.cortexdocker.tls.certresolver=mytlschallenge"
+
+      - "traefik.http.routers.cortexdocker_http.entrypoints=http"
+      - "traefik.http.routers.cortexdocker_http.rule=Host(`${CORTEX_HOST}`)"
+      - "traefik.http.routers.cortexdocker_http.middlewares=traefik-redirectscheme"
+      - "traefik.http.middlewares.traefik-redirectscheme.redirectscheme.scheme=https"
+
+  thehive:
+    image: thehiveproject/thehive:3.4.4-1
+    depends_on:
+      - elasticsearch
+      - cortex
+      - traefik
+    command:
+      --cortex-port 9001
+      --cortex-key ${CORTEX_KEY}
+    networks:
+      - proxy
+      - backend
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.thehivedocker.entrypoints=https"
+      - "traefik.http.routers.thehivedocker.rule=Host(`${THEHIVE_HOST}`)"
+      - "traefik.http.routers.thehivedocker.service=thehivedocker"
+      - "traefik.http.routers.thehivedocker.tls=true"
+      - "traefik.http.services.thehivedocker.loadbalancer.server.port=9000"
+      - "traefik.http.routers.thehivedocker.tls.certresolver=mytlschallenge"
+
+      - "traefik.http.routers.thehivedocker_http.entrypoints=http"
+      - "traefik.http.routers.thehivedocker_http.rule=Host(`${THEHIVE_HOST}`)"
+      - "traefik.http.routers.thehivedocker_http.middlewares=traefik-redirectscheme"
+      - "traefik.http.middlewares.traefik-redirectscheme.redirectscheme.scheme=https"
+
+  traefik:
+    image: traefik:v2.3.3
+    environment:
+      - AWS_HOSTED_ZONE_ID=${AWS_HOSTED_ZONE_ID}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    restart: always
+    container_name: traefik
+    ports:
+      - "80:80"
+      - "443:443"
+    command:
+      - --api.insecure=true # set to 'false' on production
+      - --api.dashboard=true
+      - --api.debug=false
+      - --log.level=DEBUG
+      - --providers.docker=true
+      - --providers.docker.swarmMode=false
+      - --providers.docker.exposedbydefault=false
+      - --providers.docker.network=proxy
+      - --entrypoints.http.address=:80
+      - --entrypoints.https.address=:443
+      - --certificatesResolvers.mytlschallenge.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory # Generates LE test certificates.  Can be removed for production
+      - --certificatesResolvers.mytlschallenge.acme.dnsChallenge=true
+      - --certificatesResolvers.mytlschallenge.acme.dnsChallenge.provider=route53
+      - --certificatesresolvers.mytlschallenge.acme.email=${LE_EMAIL}
+      - --certificatesresolvers.mytlschallenge.acme.storage=/letsencrypt/acme.json
+
+    volumes:
+      - "letsencrypt:/letsencrypt"
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.entrypoints=https"
+      - "traefik.http.routers.api.rule=Host(`${TRAEFIK_HOST}`)"
+      - "traefik.http.routers.api.service=api@internal"
+      - "traefik.http.routers.api.tls=true"
+      - "traefik.http.services.api.loadbalancer.server.port=8080"
+      - "traefik.http.routers.api.tls.certresolver=mytlschallenge"
+
+      - "traefik.http.routers.api_http.entrypoints=http"
+      - "traefik.http.routers.api_http.rule=Host(`${TRAEFIK_HOST}`)"
+      - "traefik.http.routers.api_http.middlewares=traefik-redirectscheme"
+      - "traefik.http.middlewares.traefik-redirectscheme.redirectscheme.scheme=https"
+
+networks:
+  backend:
+  proxy:
+    external: true
+
+volumes:
+  letsencrypt:
