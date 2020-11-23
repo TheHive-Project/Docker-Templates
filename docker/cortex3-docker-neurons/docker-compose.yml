@@ -1,7 +1,7 @@
-version: "2"
+version: '2'
 services:
   elasticsearch:
-    image: elasticsearch:7.8.1
+    image: 'elasticsearch:7.8.1'
     environment:
       - http.host=0.0.0.0
       - discovery.type=single-node
@@ -9,13 +9,13 @@ services:
       - thread_pool.search.queue_size=100000
       - thread_pool.write.queue_size=10000
   cortex:
-    image: thehiveproject/cortex:3.1.0-1
+    image: 'thehiveproject/cortex:3.1.0-1'
     environment:
-      - job_directory=${job_directory}
+      - 'job_directory=${job_directory}'
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ${job_directory}:${job_directory}
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '${job_directory}:${job_directory}'
     depends_on:
       - elasticsearch
     ports:
-      - "0.0.0.0:9001:9001"
+      - '0.0.0.0:9001:9001'
