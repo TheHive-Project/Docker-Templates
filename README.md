@@ -1,4 +1,4 @@
-![](assets/logos.png)
+![](assets/header.png)
 
 Welcome to TheHive Project's Docker Templates repository.
 
