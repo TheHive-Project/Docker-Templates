@@ -18,8 +18,8 @@ This repository aims to be a location where TheHive and Cortex users can find an
 
 ## Available configuration
 
-- [TheHive 3 + Cortex 3](./thehive3-cortex3-es7)
-- [Cortex 3 with dockerized neurons](./cortex3-dockerized-neurons)
+- [TheHive 3 + Cortex 3](./docker/thehive3-cortex3-es7)
+- [Cortex 3 with dockerized neurons](./docker/cortex3-dockerized-neurons)
 
 ## TODO
 
