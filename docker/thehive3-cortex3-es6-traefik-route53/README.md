@@ -29,7 +29,8 @@ docker-compose up -d
 
 ## FAQ
 
-Q: My certificates have been issued against `Fake LE Intermediate X1` and come up as invalid.
+Q: My certificates have been issued against `Fake LE Intermediate X1` and come up as invalid.  
+
 A: While testing, to avoid excessive certificate requests the test certificates are used.  To fix this, comment out the line marked `- --certificatesResolvers.mytlschallenge.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory`
 
 ## References
