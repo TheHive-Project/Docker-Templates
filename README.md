@@ -15,6 +15,7 @@ This repository aims to be a location where TheHive and Cortex users can find an
 - OAuth Providers
 - Workflow and automation tools
 - Feeders
+
 ## TODO
 
 The list bellow includes the docker-compose configurations to be done:
@@ -24,5 +25,6 @@ The list bellow includes the docker-compose configurations to be done:
 - [ ] TheHive 4 + Cassandra
 - [ ] Cortex 3 + dockerized neurons
 - [ ] Cortex 3 + local neurons
+
 # Contributing
 Please see our [Code of conduct](code_of_conduct.md). We welcome your contributions. Please feel free to fork the code, play with it, make some patches and send us pull requests via [issues](https://github.com/TheHive-Project/TheHive/issues).
