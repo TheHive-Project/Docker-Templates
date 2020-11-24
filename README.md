@@ -16,16 +16,31 @@ This repository aims to be a location where TheHive and Cortex users can find an
 - Workflow and automation tools
 - Feeders
 
-## Common configurations
+## Common configuration
 
-This section should describe the common configuration that can be commonly used in diverse docker-compose templates relying on TheHive and/or Cortex
-### TODO
+This section describes the possible configuration options for the major components
 
-Add documentation on possible application config for TheHive and Cortex images
+### How to configure Elasticsearch
+
+```
+TODO
+```
+
+### How to configure Cassandra
+
+```
+TODO
+```
+### How to configure TheHive
 
 - How to configure TheHive
   - `application.conf` file
   - `logback.xml` file
+
+```
+TODO
+```
+### How to configure Cortex
 - How to configure Cortex
   - dockerized neurons
   - local neurons
@@ -33,7 +48,11 @@ Add documentation on possible application config for TheHive and Cortex images
   - `application.conf` file
   - `logback.xml` file
 
-## Available configuration
+```
+TODO
+```
+
+## Available templates
 
 - [TheHive 3 + Cortex 3](./docker/thehive3-cortex3-es7)
 - [Cortex 3 with dockerized neurons](./docker/cortex3-dockerized-neurons)
