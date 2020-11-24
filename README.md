@@ -54,8 +54,12 @@ TODO
 
 ## Available templates
 
+### Basic templates
 - [TheHive 3 + Cortex 3](./docker/thehive3-cortex3-es7)
 - [Cortex 3 with dockerized neurons](./docker/cortex3-dockerized-neurons)
+
+### Custom templates
+- [TheHive 3 + Cortex 3 + Traefik + Route53](./docker/thehive3-cortex3-es6-traefik-route53)thehive3-cortex3-es6-traefik-route53 by [@aacgood](https://github.com/aacgood) (**TODO** Migrate to ES7)
 
 ## TODO
 
