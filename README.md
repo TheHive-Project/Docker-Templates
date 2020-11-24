@@ -67,6 +67,7 @@ The list bellow includes the docker-compose configurations to be done:
 - [ ] Cortex 3 + dockerized neurons
 - [ ] Cortex 3 + local neurons
 - [ ] Add reverse proxy
+  - [ ] Caddy?
   - [ ] Nginx ?
   - [ ] Traefik ?
 - [ ] Add oauth providers
