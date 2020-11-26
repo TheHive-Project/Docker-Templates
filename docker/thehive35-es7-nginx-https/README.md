@@ -1,8 +1,6 @@
-# thehive3-es6-nginx-https
+# thehive35-es7-nginx-https
 
-:warning: Elasticsearch 6 is deprecated and TheHive 3.4.x is no longer maintained.  Consider using TheHive 3.5+ with Elasticsearch 7.
-
-This is a docker-compose configuration to run a TheHive 3.4.4 instance with an Elasticsearch 6.8.8 database backend.  Nginx 1.19.5 is used as reverse proxy in which you supply your own ssl certificates.
+This is a docker-compose configuration to run a TheHive 3.5.0 instance with an Elasticsearch 7.8.1 database backend.  Nginx 1.19.5 is used as reverse proxy in which you supply your own ssl certificates.
 
 Elasticsearch storage has not been configured as persistent in this docker-compose file.
 
