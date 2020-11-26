@@ -16,7 +16,6 @@ services:
       - thehive-data:/opt/data
     depends_on:
       - cassandra
-    command: --cortex-keys <changeme>
 
 volumes:
   cassandra-data:
