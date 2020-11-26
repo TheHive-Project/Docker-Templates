@@ -84,6 +84,8 @@ TODO
 - [TheHive 3 + Cortex 3](./docker/thehive3-cortex3-es7)
 - [Cortex 3 with dockerized neurons](./docker/cortex3-dockerized-neurons)
 ### Custom templates
+
+- [TheHive 4 + Cortex 3 + MISP 2.4.134 + Shuffle 0.8.0](./docker/thehive-cortex-misp-shuffle) by [@garanews](https://github.com/garanews)
 - [TheHive 3 + Cortex 3 + ES 6 + Traefik + Route53](./docker/thehive3-cortex3-es6-traefik-route53) by [@aacgood](https://github.com/aacgood) 
 - [TheHive 3 + Cortex 3 + ES7 + Traefik + Route53](./docker/thehive3-cortex3-es7-traefik-route53) by [@aacgood](https://github.com/aacgood) 
 - [TheHive 4 + Cassandra + Traefik + Route53](./docker/thehive4-cassandra3-traefik-route53) by [@aacgood](https://github.com/aacgood) 
