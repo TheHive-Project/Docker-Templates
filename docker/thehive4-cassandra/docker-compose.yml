@@ -13,7 +13,7 @@ services:
     hostname: thehive
     volumes:
       - ./thehive.conf:/etc/thehive/application.conf:ro
-      - ./data:/data
+      - thehive-data:/opt/data
     depends_on:
       - cassandra
     command: --cortex-keys <changeme>
