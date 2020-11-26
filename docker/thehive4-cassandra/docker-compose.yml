@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  cassandra:
+    image: cassandra:3.11
+    hostname: cassandra
+    environment:
+      - CASSANDRA_CLUSTER_NAME=thp
+    volumes:
+      - cassandra-data:/var/lib/cassandra/data
+  thehive:
+    image: thehiveproject/thehive4:latest
+    hostname: thehive
+    volumes:
+      - ./thehive.conf:/etc/thehive/application.conf:ro
+      - thehive-data:/opt/data
+    ports:
+      - 9000:9000
+    depends_on:
+      - cassandra
+
+volumes:
+  cassandra-data:
+  thehive-data:
