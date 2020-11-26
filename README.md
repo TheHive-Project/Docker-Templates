@@ -1,4 +1,18 @@
-![](assets/header.png)
+<div>
+  <p align="center">
+    <img src="assets/header.png" width="700"/>  
+  </p>
+</div>
+<div>
+  <p align="center">
+    <a href="https://chat.thehive-project.org" target"_blank">
+      <img src="https://img.shields.io/discord/779945042039144498" alt="Discord">
+    </a>
+    <a href="./LICENSE" target"_blank">
+      <img src="https://img.shields.io/github/license/TheHive-Project/Docker-Templates" alt="License">
+    </a>
+  </p>
+</div>
 
 Welcome to TheHive Project's Docker Templates repository.
 
