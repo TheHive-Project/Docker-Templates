@@ -80,6 +80,7 @@ TODO
 ## Available templates
 
 ### Basic templates
+- [TheHive 4 + BerkleyDB](./docker/thehive4-berkleydb)
 - [TheHive 4 + Cassandra](./docker/thehive4-cassandra)
 - [TheHive 3.5 + Cortex 3.1](./docker/thehive35-cortex31-es7)
 - [Cortex 3 with dockerized neurons](./docker/cortex3-dockerized-neurons)
@@ -92,7 +93,7 @@ TODO
 
 #### Thehive 3.5 (Elasticsearc 7)
 
-- [TheHive 3.5 + Cortex 3.1 + ES 7 + Traefik + Route53](./docker/thehive35-cortex3-es7-traefik-route53) by [@aacgood](https://github.com/aacgood) 
+- [TheHive 3.5 + Cortex 3.1 + ES 7 + Traefik + Route53](./docker/thehive35-cortex31-es7-traefik-route53) by [@aacgood](https://github.com/aacgood) 
 - [TheHive 3.5 + es7 + nginx + https](./docker/docker/thehive35-es7-nginx-https) by [@aacgood](https://github.com/aacgood) 
 #### Thehive 3.4 (Elasticsearc 6)
 
@@ -103,14 +104,14 @@ TODO
 
 The list bellow includes the docker-compose configurations to be done:
 
-- [ ] TheHive 3 + Elasticsearch
-- [ ] TheHive 4 + BerkleyDB
-- [ ] TheHive 4 + Cassandra
-- [ ] Cortex 3 + dockerized neurons
+- [x] TheHive 3 + Elasticsearch
+- [X] TheHive 4 + BerkleyDB
+- [x] TheHive 4 + Cassandra
+- [x] Cortex 3 + dockerized neurons
 - [ ] Cortex 3 + local neurons
 - [ ] Add reverse proxy
   - [ ] Caddy?
-  - [ ] Nginx ?
+  - [x] Nginx ?
   - [ ] Traefik ?
 - [ ] Add oauth providers
   - [ ] keycloak ?

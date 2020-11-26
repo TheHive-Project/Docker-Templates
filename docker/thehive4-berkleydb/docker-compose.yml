@@ -1,0 +1,13 @@
+version: '2'
+services:
+  thehive:
+    image: 'thehiveproject/thehive4:latest'
+    container_name: thehive4
+    restart: unless-stopped
+    ports:
+      - '0.0.0.0:9000:9000'
+    volumes:
+      - ./thehive/application.conf:/etc/thehive/application.conf
+      - ./thehive/db:/tmp
+      - ./thehive/data:/opt/data
+    command: '--no-config --no-config-secret'
