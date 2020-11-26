@@ -59,13 +59,14 @@ TODO
 ## Available templates
 
 ### Basic templates
+- [TheHive 4 + Cassandra](./docker/thehive4-cassandra)
 - [TheHive 3 + Cortex 3](./docker/thehive3-cortex3-es7)
 - [Cortex 3 with dockerized neurons](./docker/cortex3-dockerized-neurons)
-
 ### Custom templates
 - [TheHive 3 + Cortex 3 + ES 6 + Traefik + Route53](./docker/thehive3-cortex3-es6-traefik-route53) by [@aacgood](https://github.com/aacgood) 
 - [TheHive 3 + Cortex 3 + ES7 + Traefik + Route53](./docker/thehive3-cortex3-es7-traefik-route53) by [@aacgood](https://github.com/aacgood) 
 - [TheHive 4 + Cassandra + Traefik + Route53](./docker/thehive4-cassandra3-traefik-route53) by [@aacgood](https://github.com/aacgood) 
+- [TheHive 3 + es6 + nginx + https](./docker/docker/thehive3-es6-nginx-https) by [@aacgood](https://github.com/aacgood) 
 ## TODO
 
 The list bellow includes the docker-compose configurations to be done:
