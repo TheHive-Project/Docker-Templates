@@ -1,24 +1,24 @@
 version: '2'
-
 services:
   cassandra:
-    image: cassandra:3.11
+    image: 'cassandra:3.11'
+    container_name: cassandra
     hostname: cassandra
     environment:
+      - MAX_HEAP_SIZE=1G
+      - HEAP_NEWSIZE=1G    
       - CASSANDRA_CLUSTER_NAME=thp
     volumes:
-      - cassandra-data:/var/lib/cassandra/data
+      - './cassandra/data:/var/lib/cassandra/data'
   thehive:
-    image: thehiveproject/thehive4:latest
-    hostname: thehive
-    volumes:
-      - ./thehive.conf:/etc/thehive/application.conf:ro
-      - thehive-data:/opt/data
-    ports:
-      - 9000:9000
+    image: 'thehiveproject/thehive4:latest'
+    container_name: thehive4
+    restart: unless-stopped    
     depends_on:
-      - cassandra
-
-volumes:
-  cassandra-data:
-  thehive-data:
+      - cassandra    
+    ports:
+      - '0.0.0.0:9000:9000'
+    volumes:
+      - ./thehive/application.conf:/etc/thehive/application.conf
+      - ./thehive/data:/opt/data
+    command: '--no-config --no-config-secret'
