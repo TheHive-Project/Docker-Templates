@@ -11,6 +11,13 @@
     <a href="./LICENSE" target"_blank">
       <img src="https://img.shields.io/github/license/TheHive-Project/Docker-Templates" alt="License">
     </a>
+    <a href="./LICENSE" target"_blank">
+      <img src="https://img.shields.io/docker/pulls/thehiveproject/thehive?color=%23f8c218&label=Thehive%20docker%20pulls" alt="License">
+    </a>
+    <a href="./LICENSE" target"_blank">
+      <img src="https://img.shields.io/docker/pulls/thehiveproject/cortex?color=%2347b7b7&label=Cortex%20docker%20pulls" alt="License">
+    </a>
+    
   </p>
 </div>
 
