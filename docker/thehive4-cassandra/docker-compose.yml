@@ -14,6 +14,8 @@ services:
     volumes:
       - ./thehive.conf:/etc/thehive/application.conf:ro
       - thehive-data:/opt/data
+    ports:
+      - 9000:9000
     depends_on:
       - cassandra
 
