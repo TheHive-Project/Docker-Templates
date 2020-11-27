@@ -48,28 +48,31 @@ We provide a documentation page for main image used by the templates. For the fu
 - [TheHive image configuration](./docs/thehive-config.md)
 - [Cortex image configuration](./docs/cortex-config.md)
 - [NGinx image configuration](./docs/nginx-config.md) 
+
 ## Available templates
 
 ### Basic templates
+
 - [TheHive 4 + BerkleyDB](./docker/thehive4-berkleydb)
 - [TheHive 4 + Cassandra](./docker/thehive4-cassandra)
 - [TheHive 3.5 + Cortex 3.1](./docker/thehive35-cortex3-es7)
 - [Cortex 3 with dockerized neurons](./docker/cortex3-docker-neurons)
+
 ### Custom templates
 
-#### TheHive 4.x
+#### TheHive
 
-- [TheHive 4 + Cortex 3 + MISP 2.4.134 + Shuffle 0.8.0](./docker/thehive4-cortex3-misp-shuffle) by [@garanews](https://github.com/garanews)
-- [TheHive 4 + Cassandra + Traefik + Route53](./docker/thehive4-cassandra3-traefik-route53) by [@aacgood](https://github.com/aacgood) 
+- [TheHive 4 + Cassandra + Traefik + Route53](./docker/thehive4-cassandra3-traefik-route53)
+- [TheHive 3.5 + es7 + nginx + https](./docker/docker/thehive35-es7-nginx-https)
+- [TheHive 3.4 + es6 + nginx + https](./docker/docker/thehive34-es6-nginx-https)
 
-#### Thehive 3.5 (Elasticsearc 7)
+#### Thehive + Cortex
 
-- [TheHive 3.5 + Cortex 3.1 + ES 7 + Traefik + Route53](./docker/thehive35-cortex31-es7-traefik-route53) by [@aacgood](https://github.com/aacgood) 
-- [TheHive 3.5 + es7 + nginx + https](./docker/docker/thehive35-es7-nginx-https) by [@aacgood](https://github.com/aacgood) 
-#### Thehive 3.4 (Elasticsearc 6)
-
-- [TheHive 3.4 + Cortex 3.0 + ES 6 + Traefik + Route53](./docker/thehive34-cortex3-es6-traefik-route53) by [@aacgood](https://github.com/aacgood) 
-- [TheHive 3.4 + es6 + nginx + https](./docker/docker/thehive34-es6-nginx-https) by [@aacgood](https://github.com/aacgood) 
+- [TheHive 4 + Cortex 3.1 + MISP 2.4.134 + Shuffle 0.8.0](./docker/thehive4-cortex3-misp-shuffle)
+- [TheHive 3.5 + Cortex 3.1 + ES 7 + Traefik + Route53](./docker/thehive35-cortex3-es7-traefik-route53)
+- [TheHive 3.5 + Cortex 3.1 + ES 7 + Nginx](./docker/thehive35-cortex3-es7-nginx-https)
+- [TheHive 3.4 + Cortex 3.0 + ES 6 + Traefik + Route53](./docker/thehive34-cortex3-es6-traefik-route53)
+- [TheHive 3.4 + Cortex 3.0 + ES 6 + Nginx](./docker/thehive34-cortex3-es6-nginx-https)
 
 ## TODO
 
@@ -87,7 +90,5 @@ The list bellow includes the docker-compose configurations to be done:
 - [ ] Add oauth providers
   - [ ] keycloak ?
   - [ ] Fusionauth ?
-
-
 # Contributing
 Please see our [Code of conduct](code_of_conduct.md). We welcome your contributions. Please feel free to fork the code, play with it, make some patches and send us pull requests via [issues](https://github.com/TheHive-Project/TheHive/issues).
