@@ -105,6 +105,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
+    <td align="center"><a href="https://github.com/milesflo"><img src="https://avatars1.githubusercontent.com/u/14067660?v=4" width="100px;" alt=""/><br /><sub><b>Miles Florence</b></sub></a><br /><a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=milesflo" title="Code">💻</a></td>
+  </tr>
+  <tr>
     <td align="center"><a href="https://blog.agood.cloud"><img src="https://avatars2.githubusercontent.com/u/28122532?v=4" width="100px;" alt=""/><br /><sub><b>aacgood</b></sub></a><br /><a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=aacgood" title="Code">💻</a></td>
   </tr>
 </table>
