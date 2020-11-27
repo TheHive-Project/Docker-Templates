@@ -21,6 +21,16 @@
         "review",
         "test"
       ]
+    },
+    {
+      "login": "garanews",
+      "name": "garanews",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/16938405?v=4",
+      "profile": "https://github.com/garanews",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
