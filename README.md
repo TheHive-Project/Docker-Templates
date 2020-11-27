@@ -12,10 +12,10 @@
       <img src="https://img.shields.io/github/license/TheHive-Project/Docker-Templates" alt="License">
     </a>
     <a href="./LICENSE" target"_blank">
-      <img src="https://img.shields.io/docker/pulls/thehiveproject/thehive?color=%23f8c218&label=Thehive%20docker%20pulls" alt="License">
+      <img src="https://img.shields.io/docker/pulls/thehiveproject/thehive?color=%23f8c218&label=Thehive%20docker%20pulls" alt="TheHive Docker pulls">
     </a>
     <a href="./LICENSE" target"_blank">
-      <img src="https://img.shields.io/docker/pulls/thehiveproject/cortex?color=%2347b7b7&label=Cortex%20docker%20pulls" alt="License">
+      <img src="https://img.shields.io/docker/pulls/thehiveproject/cortex?color=%2347b7b7&label=Cortex%20docker%20pulls" alt="Cortex Docker pulls">
     </a>
     
   </p>
@@ -37,46 +37,17 @@ This repository aims to be a location where TheHive and Cortex users can find an
 - Workflow and automation tools
 - Feeders
 
-## Common configuration
+## Configuration
 
-This section describes the possible configuration options for the major components
+For the sake of simplicity, the provided docker-compose templates are made simple, without providing the full configuration options of each docker image.
 
-### How to configure Elasticsearch
+We provide a documentation page for main image used by the templates. For the full docker image options, you need to rely on the image's official documentation.
 
-```
-TODO
-```
-
-### How to configure Cassandra
-
-```
-TODO
-```
-### How to configure TheHive
-
-- How to configure TheHive
-  - volumes
-    - `application.conf` file
-    - `logback.xml` file
-    - local file storge 
-  - command configs
-
-```
-TODO
-```
-### How to configure Cortex
-- How to configure Cortex
-  - dockerized neurons
-  - local neurons
-  - permissions
-  - volumes
-    - `application.conf` file
-    - `logback.xml` file
-
-```
-TODO
-```
-
+- [Elasticsearch image configuration](./docs/elasticsearch-config.md)
+- [Cassandra image configuration](./docs/cassandra-config.md)
+- [TheHive image configuration](./docs/thehive-config.md)
+- [Cortex image configuration](./docs/cortex-config.md)
+- [NGinx image configuration](./docs/nginx-config.md) 
 ## Available templates
 
 ### Basic templates
