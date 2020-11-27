@@ -53,8 +53,8 @@ We provide a documentation page for main image used by the templates. For the fu
 ### Basic templates
 - [TheHive 4 + BerkleyDB](./docker/thehive4-berkleydb)
 - [TheHive 4 + Cassandra](./docker/thehive4-cassandra)
-- [TheHive 3.5 + Cortex 3.1](./docker/thehive35-cortex31-es7)
-- [Cortex 3 with dockerized neurons](./docker/cortex3-dockerized-neurons)
+- [TheHive 3.5 + Cortex 3.1](./docker/thehive35-cortex3-es7)
+- [Cortex 3 with dockerized neurons](./docker/cortex3-docker-neurons)
 ### Custom templates
 
 #### TheHive 4.x
