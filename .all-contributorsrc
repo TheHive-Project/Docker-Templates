@@ -1,42 +1,27 @@
 {
-  "files": [
-    "README.md"
-  ],
-  "imageSize": 100,
-  "commit": false,
-  "contributors": [
-    {
-      "login": "aacgood",
-      "name": "aacgood",
-      "avatar_url": "https://avatars2.githubusercontent.com/u/28122532?v=4",
-      "profile": "https://blog.agood.cloud",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "milesflo",
-      "name": "Miles Florence",
-      "avatar_url": "https://avatars1.githubusercontent.com/u/14067660?v=4",
-      "profile": "https://github.com/milesflo",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "garanews",
-      "name": "garanews",
-      "avatar_url": "https://avatars1.githubusercontent.com/u/16938405?v=4",
-      "profile": "https://github.com/garanews",
-      "contributions": [
-        "code"
-      ]
-    }
-  ],
-  "contributorsPerLine": 7,
   "projectName": "Docker-Templates",
   "projectOwner": "TheHive-Project",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "nadouani",
+      "name": "Nabil Adouani",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/21827?v=4",
+      "profile": "https://strangebee.com/",
+      "contributions": [
+        "code",
+        "doc",
+        "review",
+        "test"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
 }
