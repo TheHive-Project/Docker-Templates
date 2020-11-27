@@ -1,0 +1,66 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: nginx
+    hostname: nginx
+    image: nginx:1.19.5
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - proxy
+    volumes:
+      - ./vol/nginx:/etc/nginx/conf.d
+      - ./vol/ssl:/etc/ssl
+    restart: on-failure
+
+  elasticsearch:
+    container_name: elasticsearch
+    image: elasticsearch:7.8.1
+    environment:
+      - http.host=0.0.0.0
+      - discovery.type=single-node
+      - script.allowed_types=inline
+      - thread_pool.search.queue_size=100000
+      - thread_pool.write.queue_size=10000
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    networks:
+      - backend
+
+  thehive:
+    container_name: thehive
+    image: thehiveproject/thehive:3.5.0-1
+    depends_on:
+      - elasticsearch
+    networks:
+      - proxy
+      - backend
+    command:
+      --cortex-port 9001
+      --cortex-key ${CORTEX_KEY}
+      --es-uri http://elasticsearch:9200
+
+  cortex:
+    container_name: cortex
+    image: thehiveproject/cortex:3.1.0-1
+    depends_on:
+      - elasticsearch
+    networks:
+      - proxy
+      - backend
+    command:
+      --job-directory ${JOB_DIRECTORY}
+    environment:
+      - 'JOB_DIRECTORY=${JOB_DIRECTORY}'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '${JOB_DIRECTORY}:${JOB_DIRECTORY}'
+
+networks:
+  backend:
+  proxy:
+    external: true
