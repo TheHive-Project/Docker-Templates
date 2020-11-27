@@ -6,6 +6,15 @@
   "commit": false,
   "contributors": [
     {
+      "login": "aacgood",
+      "name": "aacgood",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/28122532?v=4",
+      "profile": "https://blog.agood.cloud",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "milesflo",
       "name": "Miles Florence",
       "avatar_url": "https://avatars1.githubusercontent.com/u/14067660?v=4",
