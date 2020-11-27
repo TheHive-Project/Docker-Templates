@@ -1,6 +1,6 @@
 <div>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
   <p align="center">
     <img src="assets/header.png" width="700"/>  
@@ -106,6 +106,7 @@ Please see our [Code of conduct](code_of_conduct.md). We welcome your contributi
     <td align="center"><a href="https://strangebee.com/"><img src="https://avatars2.githubusercontent.com/u/21827?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nabil Adouani</b></sub></a><br /><a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=nadouani" title="Code">💻</a> <a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=nadouani" title="Documentation">📖</a> <a href="https://github.com/TheHive-Project/Docker-Templates/pulls?q=is%3Apr+reviewed-by%3Anadouani" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=nadouani" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://github.com/garanews"><img src="https://avatars1.githubusercontent.com/u/16938405?v=4?s=100" width="100px;" alt=""/><br /><sub><b>garanews</b></sub></a><br /><a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=garanews" title="Code">💻</a> <a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=garanews" title="Documentation">📖</a></td>
     <td align="center"><a href="https://blog.agood.cloud/"><img src="https://avatars2.githubusercontent.com/u/28122532?v=4?s=100" width="100px;" alt=""/><br /><sub><b>aacgood</b></sub></a><br /><a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=aacgood" title="Code">💻</a> <a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=aacgood" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/milesflo"><img src="https://avatars1.githubusercontent.com/u/14067660?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Miles Florence</b></sub></a><br /><a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=milesflo" title="Code">💻</a></td>
   </tr>
 </table>
 
