@@ -1,6 +1,6 @@
 # thehive4-cassandra3-cortex3-es7-nginx-https
 
-This is a docker-compose configuration to run a TheHive 4.0.1-2 + Coretex 3.1.0 instances with a Cassandra 3.1.1 database backend for TheHive and Elasticsearch 7.8.1 backend for Cortex.
+This is a docker-compose configuration to run a TheHive 4.0.2 + Cortex 3.1.0 instances with a Cassandra 3.1.1 database backend for TheHive and Elasticsearch 7.8.1 backend for Cortex.
 
 ## .env File
 
