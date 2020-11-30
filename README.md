@@ -61,6 +61,7 @@ We provide a documentation page for main image used by the templates. For the fu
 
 #### TheHive
 
+- [TheHive 4 + Cortex 3.1 + Nginx + https](./docker/thehive4-cortex31-nginx-https)
 - [TheHive 4 + Cassandra + Traefik + Route53](./docker/thehive4-cassandra3-traefik-route53)
 - [TheHive 3.5 + es7 + nginx + https](./docker/docker/thehive35-es7-nginx-https)
 - [TheHive 3.4 + es6 + nginx + https](./docker/docker/thehive34-es6-nginx-https)
@@ -89,6 +90,7 @@ The list bellow includes the docker-compose configurations to be done:
 - [ ] Add oauth providers
   - [ ] keycloak ?
   - [ ] Fusionauth ?
+
 # Contributing
 Please see our [Code of conduct](code_of_conduct.md). We welcome your contributions. Please feel free to fork the code, play with it, make some patches and send us pull requests via [issues](https://github.com/TheHive-Project/TheHive/issues).
 
