@@ -1,0 +1,87 @@
+version: "3.8"
+services:
+  nginx:
+    container_name: nginx
+    hostname: nginx
+    image: nginx:1.19.5
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - proxy
+    volumes:
+      - ./vol/nginx:/etc/nginx/conf.d
+      - ./vol/ssl:/etc/ssl
+    restart: on-failure
+
+  cassandra:
+    container_name: cassandra
+    image: cassandra:3.11
+    restart: unless-stopped    
+    hostname: cassandra
+    environment:
+      - MAX_HEAP_SIZE=1G
+      - HEAP_NEWSIZE=1G    
+      - CASSANDRA_CLUSTER_NAME=thp
+    volumes:
+      - ./vol/cassandra-data:/var/lib/cassandra/data
+    networks:
+      - backend 
+
+  elasticsearch:
+    container_name: elasticsearch
+    image: elasticsearch:7.8.1
+    environment:
+      - http.host=0.0.0.0
+      - discovery.type=single-node
+      - script.allowed_types=inline
+      - thread_pool.search.queue_size=100000
+      - thread_pool.write.queue_size=10000
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - ./vol/elasticsearch/data:/usr/share/elasticsearch/data
+      - ./vol/elasticsearch/logs:/usr/share/elasticsearch/logs
+    networks:
+      - backend
+
+  thehive:
+    container_name: thehive
+    image: 'thehiveproject/thehive4:4.0.2-1'
+    restart: unless-stopped    
+    depends_on:
+      - cassandra    
+    ports:
+      - '0.0.0.0:9000:9000'
+    volumes:
+      - ./vol/thehive/application.conf:/etc/thehive/application.conf
+      - ./vol/thehive/data:/opt/data
+    command:
+      --cortex-port 9001
+      --cortex-keys ${CORTEX_KEY}
+    networks:
+      - proxy
+      - backend
+
+  cortex:
+    container_name: cortex
+    image: thehiveproject/cortex:3.1.0-1
+    depends_on:
+      - elasticsearch
+    networks:
+      - proxy
+      - backend
+    command:
+      --job-directory ${JOB_DIRECTORY}
+    environment:
+      - 'JOB_DIRECTORY=${JOB_DIRECTORY}'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '${JOB_DIRECTORY}:${JOB_DIRECTORY}'
+
+networks:
+  backend:
+  proxy:
+    external: true
