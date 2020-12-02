@@ -1,4 +1,4 @@
-version: '2'
+version: '3.8'
 services:
   cassandra:
     image: 'cassandra:3.11'
@@ -6,14 +6,14 @@ services:
     hostname: cassandra
     environment:
       - MAX_HEAP_SIZE=1G
-      - HEAP_NEWSIZE=1G    
+      - HEAP_NEWSIZE=1G
       - CASSANDRA_CLUSTER_NAME=thp
     volumes:
       - './cassandra/data:/var/lib/cassandra/data'
   thehive:
     image: 'thehiveproject/thehive4:latest'
     container_name: thehive4
-    restart: unless-stopped    
+    restart: unless-stopped
     depends_on:
       - cassandra    
     ports:
