@@ -12,3 +12,9 @@ This tmmeplate is used to showcase the integration of TheHive and Cortex with [n
 Use `http://thehive:9000` and `http://cortex:9001` in n8n UI when defining credentials nodes.
 
 Enjoy
+
+
+## Docs
+
+- [Cortex node documentation](https://docs.n8n.io/nodes/n8n-nodes-base.cortex/#basic-operations)
+- [TheHive node documentation](https://docs.n8n.io/nodes/n8n-nodes-base.theHive/#example-usage)
