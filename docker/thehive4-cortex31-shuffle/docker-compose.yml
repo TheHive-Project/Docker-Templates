@@ -1,0 +1,122 @@
+version: '3.8'
+services:
+  ## Cortex
+  elasticsearch:
+    image: 'elasticsearch:7.9.3'
+    container_name: elasticsearch
+    restart: unless-stopped
+    ports:
+      - '0.0.0.0:9200:9200'
+    environment:
+      - http.host=0.0.0.0
+      - discovery.type=single-node
+      - cluster.name=hive
+      - script.allowed_types= inline
+      - thread_pool.search.queue_size=100000
+      - thread_pool.write.queue_size=10000
+      - gateway.recover_after_nodes=1
+      - xpack.security.enabled=false
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms256m -Xmx256m
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - './vol/elasticsearch/data:/usr/share/elasticsearch/data'
+      - './vol/elasticsearch/logs:/usr/share/elasticsearch/logs'
+  cortex:
+    image: 'thehiveproject/cortex:latest'
+    container_name: cortex
+    restart: unless-stopped
+    command:
+      --job-directory ${JOB_DIRECTORY}
+    environment:
+      - 'JOB_DIRECTORY=${JOB_DIRECTORY}'
+    volumes:
+      - './vol/cortex/application.conf:/etc/cortex/application.conf'
+      - '${JOB_DIRECTORY}:${JOB_DIRECTORY}'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    depends_on:
+      - elasticsearch
+    ports:
+      - '0.0.0.0:9001:9001'
+
+  ## TheHive
+  thehive:
+    image: 'thehiveproject/thehive4:latest'
+    container_name: 'thehive4'
+    ports:
+      - '0.0.0.0:9000:9000'
+    volumes:
+      - './vol/thehive/application.conf:/etc/thehive/application.conf'
+      - './vol/thehive/berkley:/opt/berkley'
+      - './vol/thehive/data:/opt/data'
+    networks:
+      - default
+    command: '--no-config --no-config-secret'
+
+  ## Shuffle
+  frontend:
+    image: ghcr.io/frikky/shuffle-frontend:0.8.0
+    container_name: shuffle-frontend
+    hostname: shuffle-frontend
+    ports:
+      - "3001:80"
+      - "3443:443"
+    environment:
+      - BACKEND_HOSTNAME=shuffle-backend
+    restart: unless-stopped
+    depends_on:
+      - backend
+  backend:
+    image: ghcr.io/frikky/shuffle-backend:0.8.0
+    container_name: shuffle-backend
+    hostname: shuffle-backend
+    ports:
+      - "5001:5001"
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock 
+      - ./vol/shuffle/shuffle-apps:/shuffle-apps
+    environment:
+      - DATASTORE_EMULATOR_HOST=shuffle-database:8000
+      - SHUFFLE_APP_HOTLOAD_FOLDER=./shuffle-apps
+      - ORG_ID=Shuffle
+      - SHUFFLE_APP_DOWNLOAD_LOCATION=https://github.com/frikky/shuffle-apps
+      - SHUFFLE_DEFAULT_USERNAME=${SHUFFLE_DEFAULT_USERNAME}
+      - SHUFFLE_DEFAULT_PASSWORD=${SHUFFLE_DEFAULT_PASSWORD}
+      - SHUFFLE_DEFAULT_APIKEY=${SHUFFLE_DEFAULT_APIKEY}
+      - HTTP_PROXY=
+      - HTTPS_PROXY=
+    restart: unless-stopped
+    depends_on:
+      - database
+  orborus:
+    image: ghcr.io/frikky/shuffle-orborus:0.8.0
+    container_name: shuffle-orborus
+    hostname: shuffle-orborus    
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - SHUFFLE_APP_SDK_VERSION=0.8.0
+      - SHUFFLE_WORKER_VERSION=0.8.0
+      - ORG_ID=Shuffle
+      - ENVIRONMENT_NAME=Shuffle
+      - BASE_URL=http://shuffle-backend:5001
+      - DOCKER_API_VERSION=1.40
+      - HTTP_PROXY=
+      - HTTPS_PROXY=
+      - SHUFFLE_PASS_WORKER_PROXY=False
+    restart: unless-stopped
+  database:
+    image: frikky/shuffle:database
+    container_name: shuffle-database
+    hostname: shuffle-database
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    volumes:
+      - ./vol/shuffle/database:/etc/shuffle
+
+networks:
+  default: null
