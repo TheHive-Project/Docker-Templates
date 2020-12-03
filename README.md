@@ -78,6 +78,7 @@ We provide a documentation page for main image used by the templates. For the fu
 
 - [TheHive 4 + Cortex 3.1 + n8n](./docker/thehive4-cortex31-n8n)
 - [TheHive 4 + Cortex 3.1 + Shuffle](./docker/thehive4-cortex31-shuffle)
+- [TheHive 4 + Cortex 3.1 + NodeRED](./docker/thehive4-cortex31-nodered)
 
 ## TODO
 
