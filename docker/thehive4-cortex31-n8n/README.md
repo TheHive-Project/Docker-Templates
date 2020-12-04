@@ -1,6 +1,6 @@
 ## TheHive 4 + Cortex 3.1 + n8n template
 
-This tmmeplate is used to showcase the integration of TheHive and Cortex with [n8n.io](n8n.io)
+This template is used to showcase the integration of TheHive and Cortex with [n8n.io](n8n.io)
 
 - Run the docker compose template `docker-compose up -d`
 - On `http://locahost:9001`, create a Cortex organisation and a user with an API Key
