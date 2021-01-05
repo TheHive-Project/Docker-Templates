@@ -104,7 +104,7 @@ Please see our [Code of conduct](code_of_conduct.md). We welcome your contributi
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -119,6 +119,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://blog.agood.cloud/"><img src="https://avatars2.githubusercontent.com/u/28122532?v=4?s=100" width="100px;" alt=""/><br /><sub><b>aacgood</b></sub></a><br /><a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=aacgood" title="Code">💻</a> <a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=aacgood" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/milesflo"><img src="https://avatars1.githubusercontent.com/u/14067660?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Miles Florence</b></sub></a><br /><a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=milesflo" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/jamet-julien"><img src="https://avatars3.githubusercontent.com/u/5037566?v=4?s=100" width="100px;" alt=""/><br /><sub><b>julien jamet</b></sub></a><br /><a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=jamet-julien" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://blog.cugu.eu/"><img src="https://avatars2.githubusercontent.com/u/653777?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jonas Plum</b></sub></a><br /><a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=cugu" title="Documentation">📖</a></td>
   </tr>
 </table>
 
