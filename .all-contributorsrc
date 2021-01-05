@@ -59,7 +59,17 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "cugu",
+      "name": "Jonas Plum",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/653777?v=4",
+      "profile": "https://blog.cugu.eu/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }
