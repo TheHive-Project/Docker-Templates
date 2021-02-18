@@ -15,10 +15,16 @@ services:
     container_name: thehive4
     restart: unless-stopped
     depends_on:
-      - cassandra    
+      - cassandra
     ports:
       - '0.0.0.0:9000:9000'
     volumes:
-      - ./thehive/application.conf:/etc/thehive/application.conf
-      - ./thehive/data:/opt/data
+      - type: bind
+        source: "./thehive/application.conf"
+        target: /etc/thehive/application.conf
+        read_only: true
+      - type: bind
+        source: "./thehive/data"
+        target: /opt/data
+        read_only: false
     command: '--no-config --no-config-secret'
