@@ -57,6 +57,22 @@ If you would run all containers on the same system - and maybe you have a limite
 Adjust depending on your needs and your env. Without these settings in my environment ElasticSearch was using 1.5GB
 
 
+### Known Issues
+
+If the `elasticsearch` container fails to start correctly, or constantly crashes, ensure that the folder ownership is set to the user that ran `docker-compose`.  
+
+This can be corrected by running the following command:
+
+```bash
+chown -R 1000:1000 <path_to_elasticsearch>
+```
+
+Followed by restarting the `elasticsearch` node with:
+
+```bash
+docker-compose up -d elasticsearch
+```
+
 ### Cassandra
 Like for ElasticSearch maybe you would run all on same system and maybe you don't have a limited amount of RAM, better to set some size, here for Cassandra, in docker-compose.yml I added those:
 
@@ -64,6 +80,7 @@ Like for ElasticSearch maybe you would run all on same system and maybe you don'
 ```- HEAP_NEWSIZE=1G```
 
 Adjust depending on your needs and your env. Without these settings in my environment Cassandra was using 4GB.
+
 
 ### Cortex-Analyzers
 - In order to use Analyzers in docker version, it is set  the online json url instead absolute path of analyzers in the application.conf of Cortex:
