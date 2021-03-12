@@ -1,7 +1,7 @@
 version: '2'
 services:
   elasticsearch:
-    image: 'elasticsearch:7.8.1'
+    image: 'elasticsearch:7.11.1'
     environment:
       - http.host=0.0.0.0
       - discovery.type=single-node
@@ -13,7 +13,7 @@ services:
         soft: 65536
         hard: 65536
   thehive:
-    image: 'thehiveproject/thehive:3.5.0-1'
+    image: 'thehiveproject/thehive:3.5.1-1'
     depends_on:
       - elasticsearch
     ports:
