@@ -1,4 +1,4 @@
-version: '2'
+version: '3.8'
 services:
   thehive:
     image: 'thehiveproject/thehive4:latest'
@@ -8,6 +8,7 @@ services:
       - '0.0.0.0:9000:9000'
     volumes:
       - ./thehive/application.conf:/etc/thehive/application.conf
-      - ./thehive/db:/tmp
-      - ./thehive/data:/opt/data
+      - ./thehive/db:/opt/thp/thehive/db
+      - ./thehive/index:/opt/thp/thehive/index
+      - ./thehive/data:/opt/thp/thehive/data
     command: '--no-config --no-config-secret'
