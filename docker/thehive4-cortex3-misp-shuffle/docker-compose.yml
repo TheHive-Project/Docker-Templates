@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   elasticsearch:
-    image: 'elasticsearch:7.11.1'
+    image: 'docker.elastic.co/elasticsearch/elasticsearch:7.11.1'
     container_name: elasticsearch
     restart: unless-stopped
     ports:
@@ -22,16 +22,18 @@ services:
         soft: 65536
         hard: 65536
     volumes:
-      - ./elasticsearch_data:/usr/share/elasticsearch/data
-      - ./elasticsearch_logs:/usr/share/elasticsearch/logs
+      - ./vol/elasticsearch_data:/usr/share/elasticsearch/data
+      - ./vol/elasticsearch_logs:/usr/share/elasticsearch/logs
+
   kibana:
-    image: 'docker.elastic.co/kibana/kibana:7.9.3'
+    image: 'docker.elastic.co/kibana/kibana:7.11.1'
     container_name: kibana
     restart: unless-stopped
     depends_on:
       - elasticsearch
     ports:
       - '5601:5601'
+
   cortex:
     image: 'thehiveproject/cortex:latest'
     container_name: cortex
@@ -40,6 +42,9 @@ services:
       - ./cortex/application.conf:/etc/cortex/application.conf
       - /var/run/docker.sock:/var/run/docker.sock
       - /tmp:/tmp
+    environment:
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}      
     depends_on:
       - elasticsearch
     ports:
@@ -55,7 +60,7 @@ services:
       - HEAP_NEWSIZE=1G
       - CASSANDRA_CLUSTER_NAME=thp
     volumes:
-      - ./cassandra-data:/var/lib/cassandra/data
+      - ./vol/cassandra-data:/var/lib/cassandra/data
 
   thehive:
     image: 'thehiveproject/thehive4:latest'
@@ -67,8 +72,8 @@ services:
       - '0.0.0.0:9000:9000'
     volumes:
       - ./thehive/application.conf:/etc/thehive/application.conf
-      - ./data:/opt/data
-      - ./thehive/index:/opt/thp/thehive/index
+      - ./vol/data:/opt/data
+      - ./vol/index:/opt/index
     command: '--no-config --no-config-secret'
 
   redis:
@@ -78,17 +83,18 @@ services:
 
   db:
     image: mysql:latest
-    container_name: mysql
+    container_name: db
     restart: unless-stopped
     command: --default-authentication-plugin=mysql_native_password
-    restart: always
+    restart: unless-stopped
     environment:
       - "MYSQL_USER=misp"
       - "MYSQL_PASSWORD=example"
       - "MYSQL_ROOT_PASSWORD=password"
       - "MYSQL_DATABASE=misp"
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./vol/mysql:/var/lib/mysql
+
   misp:
     image: coolacid/misp-docker:core-latest
     container_name: misp
@@ -105,6 +111,7 @@ services:
       - "INIT=true"             # Initialze MISP, things includes, attempting to import SQL and the Files DIR
       - "CRON_USER_ID=1"        # The MISP user ID to run cron jobs as
       - "DISIPV6=true" # Disable IPV6 in nginx
+
   misp-modules:
     image: coolacid/misp-docker:modules-latest
     container_name: misp-modules
@@ -116,7 +123,7 @@ services:
 
 #READY FOR AUTOMATION ?
   frontend:
-    image: ghcr.io/frikky/shuffle-frontend:0.8.0
+    image: ghcr.io/frikky/shuffle-frontend:0.8.64
     container_name: shuffle-frontend
     hostname: shuffle-frontend
     ports:
@@ -127,37 +134,42 @@ services:
     restart: unless-stopped
     depends_on:
       - backend
+  
   backend:
-    image: ghcr.io/frikky/shuffle-backend:0.8.0
+    image: ghcr.io/frikky/shuffle-backend:0.8.64
     container_name: shuffle-backend
     hostname: shuffle-backend
     ports:
       - "5001:5001"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./shuffle-apps:/shuffle-apps
+      - ./vol/shuffle-apps:/shuffle-apps
+      - ./vol/shuffle-files:/shuffle-files
     environment:
       - DATASTORE_EMULATOR_HOST=shuffle-database:8000
       - SHUFFLE_APP_HOTLOAD_FOLDER=./shuffle-apps
+      - SHUFFLE_FILE_LOCATION=./shuffle-files
       - ORG_ID=Shuffle
       - SHUFFLE_APP_DOWNLOAD_LOCATION=https://github.com/frikky/shuffle-apps
       - SHUFFLE_DEFAULT_USERNAME=admin
       - SHUFFLE_DEFAULT_PASSWORD=password
       - SHUFFLE_DEFAULT_APIKEY=mysecretkey
+      - SHUFFLE_APP_FORCE_UPDATE=false
       - HTTP_PROXY=
       - HTTPS_PROXY=
     restart: unless-stopped
     depends_on:
       - database
+  
   orborus:
-    image: ghcr.io/frikky/shuffle-orborus:0.8.0
+    image: ghcr.io/frikky/shuffle-orborus:0.8.63
     container_name: shuffle-orborus
     hostname: shuffle-orborus
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - SHUFFLE_APP_SDK_VERSION=0.8.0
-      - SHUFFLE_WORKER_VERSION=0.8.0
+      - SHUFFLE_APP_SDK_VERSION=0.8.60
+      - SHUFFLE_WORKER_VERSION=0.8.63
       - ORG_ID=Shuffle
       - ENVIRONMENT_NAME=Shuffle
       - BASE_URL=http://shuffle-backend:5001
@@ -165,7 +177,13 @@ services:
       - HTTP_PROXY=
       - HTTPS_PROXY=
       - SHUFFLE_PASS_WORKER_PROXY=False
+      - SHUFFLE_ORBORUS_EXECUTION_TIMEOUT=600
+      - SHUFFLE_BASE_IMAGE_NAME=frikky
+      - SHUFFLE_BASE_IMAGE_REGISTRY=ghcr.io
+      - SHUFFLE_BASE_IMAGE_TAG_SUFFIX="-0.8.60"
+      - CLEANUP=false      
     restart: unless-stopped
+  
   database:
     image: frikky/shuffle:database
     container_name: shuffle-database
@@ -174,6 +192,6 @@ services:
       - "8000:8000"
     restart: unless-stopped
     volumes:
-      - ./shuffle-database:/etc/shuffle
+      - ./vol/shuffle-database:/etc/shuffle
 
 

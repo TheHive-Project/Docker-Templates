@@ -1,14 +1,14 @@
 ## Example of docker-compose (not for production)
 With this docker-compose.yml you will be able to run the following images:
-- The Hive 4.0.1-1
+- The Hive 4.1.0-1
 - Cassandra 3.11
 - Cortex 3.1.0-1
-- Elasticsearch 7.9.3
+- Elasticsearch 7.11.1
 - Kibana 7.9.3
 - MISP 2.4.134
 - Mysql 8.0.22
 - Redis 6.0.9
-- Shuffle 0.8.0
+- Shuffle 0.8.64
 
 ## Some Hint
 
@@ -33,16 +33,24 @@ If you take a look of docker-compose.yml you will see you need some local folder
 Structure would look like:
 ```
 ├── docker-compose.yml
-├── elasticsearch_data
-|── elasticsearch_logs
+├── README.md
+├── thehive
+│   └── application.conf
 ├── cortex
-│   └── application.conf 
-|── thehive
-|   └── application.conf
-|── data
-|── mysql
+│   └── application.conf
+└── vol
+    ├── cassandra-data
+    ├── data
+    ├── elasticsearch_data
+    ├── elasticsearch_logs
+    ├── index
+    ├── mysql
+    ├── shuffle-apps
+    ├── shuffle-database
+    └── shuffle-files
 ```
-If you run docker-compose with sudo, ensure you have created elasticsearch_data and elasticsearch_logs folders with non root user, otherwise elasticsearch container will not start.
+If you run docker-compose with sudo, ensure you have created vol/elasticsearch_data and vol/elasticsearch_logs folders with non root user, otherwise elasticsearch container will not start.
+In the same way permission must be granted to vol/index folder or thehive container will raise issues.
 
 ### ElasticSearch
 ElasticSearch container likes big mmap count (https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html) so from shell you can change with
@@ -111,14 +119,11 @@ Adjust depending on your needs and your env. Without these settings in my enviro
 - In order to connect The Hive with cortex take the cortex key generated in Cortex and set it in thehive/application.conf
 - MISP connection is https, in order to skip the verify of self signed certificate have do add this setting in the hive application.conf under MISP section:
   ``` wsConfig { ssl { loose { acceptAnyCertificate: true } } } ```
-
-  
+ 
 ### MISP
-
 - login with default credentials: admin@admin.test // admin
 - request change password
 - go in Automation page and grab the api key to use in the hive application.conf to receive alerts from MISP or to use in MISP analyzers inside Cortex.
-
 
 ### SHUFFLE
 To test automation I choose SHUFFLE (https://shuffler.io/)
