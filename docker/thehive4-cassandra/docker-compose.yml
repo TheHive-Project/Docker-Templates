@@ -19,16 +19,7 @@ services:
     ports:
       - '0.0.0.0:9000:9000'
     volumes:
-      - type: bind
-        source: './vol/thehive/application.conf'
-        target: /etc/thehive/application.conf
-        read_only: true
-      - type: bind
-        source: './vol/thehive/data'
-        target: /opt/thp/thehive/data
-        read_only: false
-      - type: bind
-        source: './vol/thehive/index'
-        target: /opt/thp/thehive/index
-        read_only: false
+      - ./vol/thehive/application.conf:/etc/thehive/application.conf
+      - ./vol/thehive/data:/opt/thp/thehive/data
+      - ./vol/thehive/index:/opt/thp/thehive/index
     command: '--no-config --no-config-secret'
