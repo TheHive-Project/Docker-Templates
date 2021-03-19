@@ -2,7 +2,7 @@ version: '3.8'
 services:
   ## Cortex
   elasticsearch:
-    image: 'elasticsearch:7.9.3'
+    image: 'elasticsearch:7.11.1'
     container_name: elasticsearch
     restart: unless-stopped
     ports:
@@ -49,9 +49,10 @@ services:
     ports:
       - '0.0.0.0:9000:9000'
     volumes:
-      - './vol/thehive/application.conf:/etc/thehive/application.conf'
-      - './vol/thehive/berkley:/opt/berkley'
-      - './vol/thehive/data:/opt/data'
+      - ./vol/thehive/application.conf:/etc/thehive/application.conf
+      - ./vol/thehive/db:/opt/thp/thehive/db
+      - ./vol/thehive/data:/opt/thp/thehive/data
+      - ./vol/thehive/index:/opt/thp/thehive/index
     networks:
       - default
     command: '--no-config --no-config-secret'

@@ -9,7 +9,7 @@ services:
       - HEAP_NEWSIZE=1G
       - CASSANDRA_CLUSTER_NAME=thp
     volumes:
-      - './cassandra/data:/var/lib/cassandra/data'
+      - './vol/cassandra/data:/var/lib/cassandra/data'
   thehive:
     image: 'thehiveproject/thehive4:latest'
     container_name: thehive4
@@ -20,15 +20,15 @@ services:
       - '0.0.0.0:9000:9000'
     volumes:
       - type: bind
-        source: './thehive/application.conf'
+        source: './vol/thehive/application.conf'
         target: /etc/thehive/application.conf
         read_only: true
       - type: bind
-        source: './thehive/data'
+        source: './vol/thehive/data'
         target: /opt/thp/thehive/data
         read_only: false
       - type: bind
-        source: './thehive/index'
+        source: './vol/thehive/index'
         target: /opt/thp/thehive/index
         read_only: false
     command: '--no-config --no-config-secret'

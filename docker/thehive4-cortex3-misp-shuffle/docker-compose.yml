@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   elasticsearch:
-    image: 'elasticsearch:7.9.3'
+    image: 'elasticsearch:7.11.1'
     container_name: elasticsearch
     restart: unless-stopped
     ports:
@@ -16,30 +16,30 @@ services:
       - gateway.recover_after_nodes=1
       - xpack.security.enabled=false
       - bootstrap.memory_lock=true
-      - 'ES_JAVA_OPTS=-Xms256m -Xmx256m'      
+      - 'ES_JAVA_OPTS=-Xms256m -Xmx256m'
     ulimits:
       nofile:
         soft: 65536
         hard: 65536
     volumes:
       - ./elasticsearch_data:/usr/share/elasticsearch/data
-      - ./elasticsearch_logs:/usr/share/elasticsearch/logs        
+      - ./elasticsearch_logs:/usr/share/elasticsearch/logs
   kibana:
     image: 'docker.elastic.co/kibana/kibana:7.9.3'
     container_name: kibana
-    restart: unless-stopped        
+    restart: unless-stopped
     depends_on:
       - elasticsearch
     ports:
       - '5601:5601'
   cortex:
-    image: 'thehiveproject/cortex:3.1.0-1'  
+    image: 'thehiveproject/cortex:latest'
     container_name: cortex
-    restart: unless-stopped    
+    restart: unless-stopped
     volumes:
       - ./cortex/application.conf:/etc/cortex/application.conf
       - /var/run/docker.sock:/var/run/docker.sock
-      - /tmp:/tmp  
+      - /tmp:/tmp
     depends_on:
       - elasticsearch
     ports:
@@ -48,37 +48,38 @@ services:
   cassandra:
     image: cassandra:3.11
     container_name: cassandra
-    restart: unless-stopped    
+    restart: unless-stopped
     hostname: cassandra
     environment:
       - MAX_HEAP_SIZE=1G
-      - HEAP_NEWSIZE=1G    
+      - HEAP_NEWSIZE=1G
       - CASSANDRA_CLUSTER_NAME=thp
     volumes:
-      - ./cassandra-data:/var/lib/cassandra/data     
+      - ./cassandra-data:/var/lib/cassandra/data
 
   thehive:
     image: 'thehiveproject/thehive4:latest'
     container_name: thehive
-    restart: unless-stopped    
+    restart: unless-stopped
     depends_on:
-      - cassandra    
+      - cassandra
     ports:
       - '0.0.0.0:9000:9000'
     volumes:
       - ./thehive/application.conf:/etc/thehive/application.conf
       - ./data:/opt/data
+      - ./thehive/index:/opt/thp/thehive/index
     command: '--no-config --no-config-secret'
 
   redis:
     image: redis:latest
     container_name: redis
-    restart: unless-stopped    
+    restart: unless-stopped
 
   db:
     image: mysql:latest
-    container_name: mysql    
-    restart: unless-stopped     
+    container_name: mysql
+    restart: unless-stopped
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
@@ -91,7 +92,7 @@ services:
   misp:
     image: coolacid/misp-docker:core-latest
     container_name: misp
-    restart: unless-stopped     
+    restart: unless-stopped
     depends_on:
       - redis
       - db
@@ -111,7 +112,7 @@ services:
       - "REDIS_BACKEND=redis"
     depends_on:
       - redis
-      - db 
+      - db
 
 #READY FOR AUTOMATION ?
   frontend:
@@ -120,7 +121,7 @@ services:
     hostname: shuffle-frontend
     ports:
       - "3001:80"
-      - "3443:443"    
+      - "3443:443"
     environment:
       - BACKEND_HOSTNAME=shuffle-backend
     restart: unless-stopped
@@ -132,9 +133,9 @@ services:
     hostname: shuffle-backend
     ports:
       - "5001:5001"
-    volumes: 
-      - /var/run/docker.sock:/var/run/docker.sock 
-      - ./shuffle-apps:/shuffle-apps     
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./shuffle-apps:/shuffle-apps
     environment:
       - DATASTORE_EMULATOR_HOST=shuffle-database:8000
       - SHUFFLE_APP_HOTLOAD_FOLDER=./shuffle-apps
@@ -151,7 +152,7 @@ services:
   orborus:
     image: ghcr.io/frikky/shuffle-orborus:0.8.0
     container_name: shuffle-orborus
-    hostname: shuffle-orborus    
+    hostname: shuffle-orborus
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:

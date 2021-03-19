@@ -1,4 +1,5 @@
 vol/elasticsearch
 vol/shuffle
+vol/thehive/db
 vol/thehive/data
-vol/thehive/berkley
+vol/thehive/index

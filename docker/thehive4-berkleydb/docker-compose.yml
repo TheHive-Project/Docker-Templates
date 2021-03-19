@@ -7,8 +7,8 @@ services:
     ports:
       - '0.0.0.0:9000:9000'
     volumes:
-      - ./thehive/application.conf:/etc/thehive/application.conf
-      - ./thehive/db:/opt/thp/thehive/db
-      - ./thehive/index:/opt/thp/thehive/index
-      - ./thehive/data:/opt/thp/thehive/data
+      - ./vol/thehive/application.conf:/etc/thehive/application.conf
+      - ./vol/thehive/db:/opt/thp/thehive/db
+      - ./vol/thehive/index:/opt/thp/thehive/index
+      - ./vol/thehive/data:/opt/thp/thehive/data
     command: '--no-config --no-config-secret'

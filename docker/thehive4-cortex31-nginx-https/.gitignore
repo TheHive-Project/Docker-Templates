@@ -1,2 +1,4 @@
-vol/cassandra-data
+vol/cassandra/data
 vol/elasticsearch
+vol/thehive/data
+vol/thehive/index
