@@ -1,3 +1,4 @@
 vol/thehive/data
-vol/thehive/database
+vol/thehive/db
+vol/thehive/index
 vol/elasticsearch

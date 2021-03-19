@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   elasticsearch:
-    image: 'elasticsearch:7.9.3'
+    image: 'elasticsearch:7.11.1'
     container_name: elasticsearch
     restart: unless-stopped
     ports:
@@ -48,6 +48,7 @@ services:
       - '0.0.0.0:9000:9000'
     volumes:
       - ./vol/thehive/application.conf:/etc/thehive/application.conf
-      - ./vol/thehive/database:/opt/database
-      - ./vol/thehive/data:/opt/data
+      - ./vol/thehive/db:/opt/thp/thehive/db
+      - ./vol/thehive/index:/opt/thp/thehive/index
+      - ./vol/thehive/data:/opt/thp/thehive/data
     command: '--no-config --no-config-secret'
