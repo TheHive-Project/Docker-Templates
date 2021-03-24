@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  scylladb:
+    image: scylladb/scylla
+    container_name: scylladb
+    volumes:
+      - "./vol/scylla/data:/var/lib/scylla"
+  thehive:
+    image: "thehiveproject/thehive4:latest"
+    container_name: thehive4
+    restart: unless-stopped
+    depends_on:
+      - scylladb
+    ports:
+      - "0.0.0.0:9000:9000"
+    volumes:
+      - ./vol/thehive/application.conf:/etc/thehive/application.conf
+      - ./vol/thehive/data:/opt/thp/thehive/data
+      - ./vol/thehive/index:/opt/thp/thehive/index
+    command: "--no-config --no-config-secret"
