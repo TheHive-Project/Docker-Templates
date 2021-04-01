@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  nginx:
+    container_name: nginx
+    hostname: nginx
+    image: nginx:1.19.5
+    ports:
+      - 443:443
+    volumes:
+      - ./vol/nginx:/etc/nginx/conf.d
+      - ./vol/ssl:/etc/ssl
+    restart: on-failure
+    links:
+      - thehive
+
+  thehive:
+    image: thehiveproject/thehive4:latest
+    environment:
+      - MAX_HEAP_SIZE=1G
+      - HEAP_NEWSIZE=1G
+    volumes:
+      - ./vol/thehive/application.conf:/etc/thehive/application.conf
+      - ./vol/thehive/db:/opt/thp/thehive/db
+      - ./vol/thehive/index:/opt/thp/thehive/index
+      - ./vol/thehive/data:/opt/thp/thehive/data
+    command: --no-config --no-config-secret
