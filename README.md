@@ -106,7 +106,7 @@ Please see our [Code of conduct](code_of_conduct.md). We welcome your contributi
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -123,6 +123,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/jamet-julien"><img src="https://avatars3.githubusercontent.com/u/5037566?v=4?s=100" width="100px;" alt=""/><br /><sub><b>julien jamet</b></sub></a><br /><a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=jamet-julien" title="Documentation">📖</a></td>
     <td align="center"><a href="https://blog.cugu.eu/"><img src="https://avatars2.githubusercontent.com/u/653777?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jonas Plum</b></sub></a><br /><a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=cugu" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/rhaist"><img src="https://avatars.githubusercontent.com/u/182332?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Robert Haist</b></sub></a><br /><a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=rhaist" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://federschmidt.xyz"><img src="https://avatars.githubusercontent.com/u/2430239?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Daniel Federschmidt</b></sub></a><br /><a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=dfederschmidt" title="Code">💻</a></td>
   </tr>
 </table>
 
