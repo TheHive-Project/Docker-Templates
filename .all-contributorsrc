@@ -68,6 +68,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "rhaist",
+      "name": "Robert Haist",
+      "avatar_url": "https://avatars.githubusercontent.com/u/182332?v=4",
+      "profile": "https://github.com/rhaist",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
