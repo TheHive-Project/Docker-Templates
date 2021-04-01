@@ -53,6 +53,7 @@ We provide a documentation page for main image used by the templates. For the fu
 ### Basic templates
 
 - [TheHive 4.1 minimal configuration](./docker/thehive4-minimal)
+- [TheHive 4.1 minimal + nginx + https](./docker/thehive4-minimal-nginx-https)
 - [TheHive 4.1 + BerkleyDB](./docker/thehive4-berkleydb)
 - [TheHive 4.1 + Cassandra](./docker/thehive4-cassandra)
 - [TheHive 4.1 + ScyllaDB](./docker/thehive4-scylladb) (TO BE TESTED)
