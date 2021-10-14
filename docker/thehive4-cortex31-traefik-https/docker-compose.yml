@@ -1,0 +1,140 @@
+version: "3.8"
+services:
+  traefik:
+    container_name: traefik
+    hostname: traefik
+    image: traefik:v2.5
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    command:
+      - --api.insecure=true
+      - --api.dashboard=true
+      - --api.debug=false
+      - --log.level=DEBUG
+      - --providers.docker=true
+      - --entrypoints.web.address=:80
+      - --entrypoints.web-secure.address=:443
+      - --providers.file.directory=/etc/traefik/dynamic
+      - --providers.file.watch=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./vol/traefik/conf/:/etc/traefik/dynamic/
+      - ./vol/traefik/certs/:/etc/certs/
+    networks:
+      backend:
+      proxy:
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.entrypoints=web-secure"
+      - "traefik.http.routers.api.rule=Host(`traefik.localtest.me`)"
+      - "traefik.http.routers.api.service=api@internal"
+      - "traefik.http.routers.api.tls=true"
+      - "traefik.http.routers.dashboard.entrypoints=web-secure"
+      - "traefik.http.services.api.loadbalancer.server.port=8080"
+      - "traefik.http.routers.api_http.entrypoints=web"
+      - "traefik.http.routers.api_http.rule=Host(`traefik.localtest.me`)"
+      - "traefik.http.routers.api_http.middlewares=traefik-redirectscheme"
+      - "traefik.http.middlewares.traefik-redirectscheme.redirectscheme.scheme=web-secure"
+
+  cassandra:
+    container_name: cassandra
+    image: cassandra:3.11
+    restart: unless-stopped
+    hostname: cassandra
+    environment:
+      - MAX_HEAP_SIZE=1G
+      - HEAP_NEWSIZE=1G
+      - CASSANDRA_CLUSTER_NAME=thp
+    volumes:
+      - ./vol/cassandra/data:/var/lib/cassandra/data
+    networks:
+      - backend
+
+  elasticsearch:
+    container_name: elasticsearch
+    image: elasticsearch:7.11.1
+    environment:
+      - http.host=0.0.0.0
+      - discovery.type=single-node
+      - cluster.name=hive
+      - script.allowed_types=inline
+      - thread_pool.search.queue_size=100000
+      - thread_pool.write.queue_size=10000
+      - gateway.recover_after_nodes=1
+      - xpack.security.enabled=false
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms256m -Xmx256m
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - ./vol/elasticsearch/data:/usr/share/elasticsearch/data
+      - ./vol/elasticsearch/logs:/usr/share/elasticsearch/logs
+    networks:
+      - backend
+
+  thehive:
+    container_name: thehive
+    image: 'thehiveproject/thehive4:latest'
+    restart: unless-stopped
+    depends_on:
+      - cassandra
+      - traefik
+    ports:
+      - '0.0.0.0:9000:9000'
+    volumes:
+      - ./vol/thehive/application.conf:/etc/thehive/application.conf
+      - ./vol/thehive/data:/opt/thp/thehive/data
+      - ./vol/thehive/index:/opt/thp/thehive/index
+    networks:
+      - proxy
+      - backend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.thehive.entrypoints=web-secure"
+      - "traefik.http.routers.thehive.rule=Host(`thehive.localtest.me`)"
+      - "traefik.http.routers.thehive.service=thehive"
+      - "traefik.http.routers.thehive.tls=true"
+      - "traefik.http.services.thehive.loadbalancer.server.port=9000"
+      - "traefik.http.routers.thehive_http.entrypoints=web"
+      - "traefik.http.routers.thehive_http.rule=Host(`thehive.localtest.me`)"
+      - "traefik.http.routers.thehive_http.middlewares=traefik-redirectscheme"
+      - "traefik.http.middlewares.traefik-redirectscheme.redirectscheme.scheme=web-secure"
+
+  cortex:
+    container_name: cortex
+    image: thehiveproject/cortex:latest
+    depends_on:
+      - elasticsearch
+      - traefik
+    networks:
+      - proxy
+      - backend
+    command:
+      --job-directory /opt/cortex/jobs
+    environment:
+      - 'JOB_DIRECTORY=/opt/cortex/jobs'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - './vol/cortex/application.conf:/etc/cortex/application.conf'
+      - './vol/cortex/jobs:/opt/cortex/jobs'
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cortex.entrypoints=web-secure"
+      - "traefik.http.routers.cortex.rule=Host(`cortex.localtest.me`)"
+      - "traefik.http.routers.cortex.service=cortex"
+      - "traefik.http.routers.cortex.tls=true"
+      - "traefik.http.services.cortex.loadbalancer.server.port=9001"
+      - "traefik.http.routers.cortex_http.entrypoints=web"
+      - "traefik.http.routers.cortex_http.rule=Host(`cortex.localtest.me`)"
+      - "traefik.http.routers.cortex_http.middlewares=traefik-redirectscheme"
+      - "traefik.http.middlewares.traefik-redirectscheme.redirectscheme.scheme=web-secure"
+
+networks:
+  backend:
+  proxy:
