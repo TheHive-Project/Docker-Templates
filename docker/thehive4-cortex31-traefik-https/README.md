@@ -6,8 +6,39 @@ Traefik is configured with TLS entrypoints with certificate that expires @ year 
 
 ## Usage
 
+### Starting stack for first time
 ```bash
 docker-compose up -d
+```
+
+### Configuration
+After the stack is up and running navigate to [Cortex](https://cortex.localtest.me) and update database + create admin account. Login with admin account and create API-user for hive. Create API-key to that user and copy API-key to the clipboard. Replace `GET THIS FROM CORTEX` in file `./vol/thehive/application.conf` with that API-key   
+
+```bash
+play.modules.enabled += org.thp.thehive.connector.cortex.CortexModule
+cortex {
+  servers = [
+    {
+      name = local
+      url = "http://cortex:9001"
+      auth {
+        type = "bearer"
+        key = "GET THIS FROM CORTEX"
+      }
+    }
+  ]
+}
+```
+
+and restart stack.
+```bash
+docker-compose restart
+```
+
+### Replacing TLS certificate
+One can change TLS-certificates with "legit" certs or generate own self-signed certs with command   
+```bash
+openssl req -new -newkey rsa:4096 -x509 -sha256 -days 7300 -nodes -out ./vol/traefik/certs/server.cer -keyout ./vol/traefik/certs/private.key
 ```
 
 ## Volume Configuration

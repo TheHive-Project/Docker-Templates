@@ -1,4 +1,4 @@
-vol/cassandra/data
-vol/elasticsearch
-vol/thehive/data
-vol/thehive/index
+#vol/cassandra/data
+#vol/elasticsearch
+#vol/thehive/data
+#vol/thehive/index
