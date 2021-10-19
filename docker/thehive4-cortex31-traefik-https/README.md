@@ -1,10 +1,15 @@
 # thehive4-cassandra3-cortex3-traefik-https
 
 This is a docker-compose configuration to run latest TheHive4 + latest Cortex instances with a Cassandra 3.1.1 database backend for TheHive and Elasticsearch 7.8.1 backend for Cortex.   
-Traefik v2.5 act as a reverse proxy for TheHive and Cortex.   
-Traefik is configured with TLS entrypoints with certificate that expires @ year 2042.
+Traefik v2.5 act as a reverse proxy for TheHive and Cortex. Traefik is configured with the TLS-endpoints.   
 
 ## Usage
+
+### Generating TLS certificates
+This stack assumes that all the services are hosted in `localtest.me` domain. So certificate CN-name should be `*.localtest.me`. Generate TLS certificate and private key with the command
+```bash
+openssl req -new -newkey rsa:4096 -x509 -sha256 -days 7300 -nodes -out ./vol/traefik/certs/server.cer -keyout ./vol/traefik/certs/private.key
+```
 
 ### Starting stack for first time
 ```bash
@@ -33,12 +38,6 @@ cortex {
 and restart stack.
 ```bash
 docker-compose restart
-```
-
-### Replacing TLS certificate
-One can change TLS-certificates with "legit" certs or generate own self-signed certs with command   
-```bash
-openssl req -new -newkey rsa:4096 -x509 -sha256 -days 7300 -nodes -out ./vol/traefik/certs/server.cer -keyout ./vol/traefik/certs/private.key
 ```
 
 ## Volume Configuration
