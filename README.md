@@ -107,7 +107,7 @@ Please see our [Code of conduct](code_of_conduct.md). We welcome your contributi
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -127,6 +127,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://federschmidt.xyz"><img src="https://avatars.githubusercontent.com/u/2430239?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Daniel Federschmidt</b></sub></a><br /><a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=dfederschmidt" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/korteke"><img src="https://avatars.githubusercontent.com/u/2558348?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Keijo Korte</b></sub></a><br /><a href="https://github.com/TheHive-Project/Docker-Templates/commits?author=korteke" title="Code">💻</a></td>
   </tr>
 </table>
 
