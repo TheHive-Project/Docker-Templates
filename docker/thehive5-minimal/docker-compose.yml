@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  thehive:
+    image: strangebee/thehive:5.0.23
+    container_name: 'thehive5'
+    ports:
+      - "9000:9000"
+    environment:
+      - MAX_HEAP_SIZE=1G
+      - HEAP_NEWSIZE=1G
+    volumes:
+      - ./vol/thehive/etc:/etc/thehive
+      - ./vol/thehive/db:/opt/thp/thehive/db
+      - ./vol/thehive/index:/opt/thp/thehive/index
+      - ./vol/thehive/data:/opt/thp/thehive/data
+      - ./vol/thehive/logs:/var/log/thehive
